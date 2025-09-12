@@ -534,39 +534,7 @@ const InvestorDashboard = ({ initialData, onBack, onNavigateToContractStrategist
 
   return (
     <div style={styles.container}>
-    <div style={{padding: "16px"}}>
-      {onBack && (
-      <button
-        onClick={onBack}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          backgroundColor: "#f97316",     // Orange background
-          color: "white",                 // White text
-          padding: "10px 16px",
-          borderRadius: "10px",
-          border: "none",
-          fontSize: "14px",
-          fontWeight: "600",
-          cursor: "pointer",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-          transition: "all 0.2s ease-in-out",
-          marginBottom: "4px",
-        }}
-        onMouseEnter={(e) => {
-          e.target.style.backgroundColor = "#ea580c"; // Darker orange on hover
-          e.target.style.transform = "translateY(-2px)";
-        }}
-        onMouseLeave={(e) => {
-          e.target.style.backgroundColor = "#f97316";
-          e.target.style.transform = "translateY(0)";
-        }}
-      >
-        <span style={{ fontSize: "16px" }}>←</span> Back to Opportunities
-      </button>
-    )}
-    </div>      
+         
     {/* {onBack && (
       <button
         onClick={onBack}
@@ -603,13 +571,35 @@ const InvestorDashboard = ({ initialData, onBack, onNavigateToContractStrategist
 
       <div style={styles.innerContainer}>
 
+        {/* Header row with back button and title */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
+          {onBack && (
+            <button
+              onClick={onBack}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                padding: '8px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                color: '#6b7280'
+              }}
+            >
+              <ArrowLeft style={{ width: '20px', height: '20px' }} />
+            </button>
+          )}
+          <h2 style={styles.cardHeaderTitle}>
+            <FileText size={24} />
+            {displayTitle}
+          </h2>
+        </div>
+
         {/* Input Form */}
         <div style={styles.card}>
           <div style={styles.cardHeader}>
-            <h2 style={styles.cardHeaderTitle}>
-              <FileText size={24} />
-              {displayTitle}
-            </h2>
+            
           </div>
           
           <div style={styles.cardContent}>

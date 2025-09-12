@@ -54,7 +54,7 @@ const Dashboard = ({ isMobile }) => {
           <div style={{ width: '50%' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               <StatCard title="Total Partners" value="127" isMobile={isMobile} />
-              <StatCard title="Avg Trust Score" value="89.5" isMobile={isMobile} />
+              <StatCard title="Avg Engagement Score" value="89.5" isMobile={isMobile} />
               <StatCard title="Opportunities" value="24" isMobile={isMobile} />
               <StatCard title="Risk Alerts" value="7" isMobile={isMobile} />
             </div>

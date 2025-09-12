@@ -1,204 +1,66 @@
+import './styles/PerformanceRiskDetail.css';
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
 const PerformanceRiskDetail = ({ onBack, onResolve, onDismiss, isMobile }) => {
   return (
-    <div style={{
-      padding: isMobile ? '16px 16px 80px 16px' : '16px'
-    }}>
+    <div className={isMobile ? 'prd-root-mobile' : 'prd-root-desktop'}>
       {/* Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        marginBottom: '24px'
-      }}>
+      <div className="prd-header-row">
         <button
           onClick={onBack}
-          style={{
-            backgroundColor: 'transparent',
-            border: 'none',
-            padding: '8px',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            color: '#6b7280'
-          }}
+          className="prd-back-btn"
         >
           <ArrowLeft style={{ width: '20px', height: '20px' }} />
         </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '12px',
-            height: '12px',
-            backgroundColor: '#f59e0b',
-            borderRadius: '50%'
-          }} />
-          <h1 style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: '#111827',
-            margin: 0
-          }}>Contract Risk</h1>
+        <div className="prd-header-title-row">
+          <div className="prd-header-dot" />
+          <h1 className="prd-header-title">Contract Risk</h1>
         </div>
       </div>
 
-      <div style={{
-        fontSize: '18px',
-        fontWeight: '600',
-        color: '#111827',
-        marginBottom: '24px'
-      }}>
-        TechVendor Inc
-      </div>
+      <div className="prd-subtitle">TechVendor Inc</div>
 
       {/* Risk Description */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        border: '1px solid #f3f4f6',
-        marginBottom: '24px'
-      }}>
-        <h2 style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          color: '#111827',
-          marginBottom: '16px'
-        }}>Risk Description</h2>
-        <p style={{
-          color: '#6b7280',
-          fontSize: '14px',
-          lineHeight: '1.6',
-          margin: 0
-        }}>
+      <div className="prd-card">
+        <h2 className="prd-card-title">Risk Description</h2>
+        <p className="prd-card-desc">
           Payment Gateway's API response time has degraded by 15% over the past 48 hours, affecting customer transaction experience and potentially impacting revenue.
         </p>
       </div>
 
       {/* AI Recommendations */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        border: '1px solid #f3f4f6',
-        marginBottom: '24px'
-      }}>
-        <h2 style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          color: '#111827',
-          marginBottom: '16px'
-        }}>AI Recommendations</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div className="prd-card">
+        <h2 className="prd-card-title">AI Recommendations</h2>
+        <div className="prd-recommend-list">
           {[
             'Escalate to Payment Gateway technical team immediately',
             'Activate backup payment processor if degradation continues',
             'Monitor customer complaint channels for transaction issues',
             'Review SLA penalties and potential compensation claims'
           ].map((recommendation, index) => (
-            <div key={index} style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '12px'
-            }}>
-              <div style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#10b981',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                marginTop: '2px'
-              }}>
-                <span style={{
-                  color: 'white',
-                  fontSize: '12px',
-                  fontWeight: 'bold'
-                }}>✓</span>
-              </div>
-              <span style={{
-                color: '#374151',
-                fontSize: '14px',
-                lineHeight: '1.5'
-              }}>{recommendation}</span>
+            <div key={index} className="prd-recommend-item">
+              <div className="prd-recommend-check"><span>✓</span></div>
+              <span className="prd-recommend-text">{recommendation}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Two Column Layout for Timeline and Stakeholders */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: '24px',
-        marginBottom: '32px'
-      }}>
+      <div className="prd-grid">
         {/* Timeline */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-          border: '1px solid #f3f4f6'
-        }}>
-          <h2 style={{
-            fontSize: '18px',
-            fontWeight: '600',
-            color: '#111827',
-            marginBottom: '16px'
-          }}>Timeline</h2>
-          <p style={{
-            color: '#6b7280',
-            fontSize: '14px',
-            margin: 0
-          }}>
-            Review needed within 30 days
-          </p>
+        <div className="prd-card">
+          <h2 className="prd-card-title">Timeline</h2>
+          <p className="prd-card-desc">Review needed within 30 days</p>
         </div>
-
         {/* Key Stakeholders */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-          border: '1px solid #f3f4f6'
-        }}>
-          <h2 style={{
-            fontSize: '18px',
-            fontWeight: '600',
-            color: '#111827',
-            marginBottom: '16px'
-          }}>Key Stakeholders</h2>
-          <ul style={{
-            listStyle: 'none',
-            padding: 0,
-            margin: 0
-          }}>
+        <div className="prd-card">
+          <h2 className="prd-card-title">Key Stakeholders</h2>
+          <ul className="prd-stakeholder-list">
             {['IT Operations', 'Customer Service', 'Business Comunity'].map((stakeholder, index) => (
-              <li key={index} style={{
-                color: '#6b7280',
-                fontSize: '14px',
-                marginBottom: '8px',
-                paddingLeft: '16px',
-                position: 'relative'
-              }}>
-                <span style={{
-                  position: 'absolute',
-                  left: '0',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: '4px',
-                  height: '4px',
-                  backgroundColor: '#9ca3af',
-                  borderRadius: '50%'
-                }} />
+              <li key={index} className="prd-stakeholder-item">
+                <span className="prd-stakeholder-dot" />
                 {stakeholder}
               </li>
             ))}
@@ -207,40 +69,16 @@ const PerformanceRiskDetail = ({ onBack, onResolve, onDismiss, isMobile }) => {
       </div>
 
       {/* Action Buttons */}
-      <div style={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        gap: '12px'
-      }}>
+      <div className="prd-action-row">
         <button
           onClick={onResolve}
-          style={{
-            flex: 1,
-            backgroundColor: '#ea580c',
-            color: 'white',
-            padding: '12px 24px',
-            borderRadius: '12px',
-            border: 'none',
-            fontWeight: '600',
-            fontSize: '16px',
-            cursor: 'pointer'
-          }}
+          className="prd-action-btn prd-action-btn-primary"
         >
           Mark as Resolved
         </button>
         <button
           onClick={onDismiss}
-          style={{
-            flex: 1,
-            backgroundColor: '#f3f4f6',
-            color: '#374151',
-            padding: '12px 24px',
-            borderRadius: '12px',
-            border: 'none',
-            fontWeight: '600',
-            fontSize: '16px',
-            cursor: 'pointer'
-          }}
+          className="prd-action-btn prd-action-btn-secondary"
         >
           Dismiss
         </button>

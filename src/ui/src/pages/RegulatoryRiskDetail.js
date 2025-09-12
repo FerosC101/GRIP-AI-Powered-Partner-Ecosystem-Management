@@ -1,204 +1,66 @@
+import './styles/RegulatoryRiskDetail.css';
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
 const RegulatoryRiskDetail = ({ onBack, onResolve, onDismiss, isMobile }) => {
   return (
-    <div style={{
-      padding: isMobile ? '16px 16px 80px 16px' : '16px'
-    }}>
+    <div className={isMobile ? 'rrd-root-mobile' : 'rrd-root-desktop'}>
       {/* Header */}
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '12px',
-        marginBottom: '24px'
-      }}>
+      <div className="rrd-header-row">
         <button
           onClick={onBack}
-          style={{
-            backgroundColor: 'transparent',
-            border: 'none',
-            padding: '8px',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            color: '#6b7280'
-          }}
+          className="rrd-back-btn"
         >
           <ArrowLeft style={{ width: '20px', height: '20px' }} />
         </button>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '12px',
-            height: '12px',
-            backgroundColor: '#f59e0b',
-            borderRadius: '50%'
-          }} />
-          <h1 style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: '#111827',
-            margin: 0
-          }}>Contract Risk</h1>
+        <div className="rrd-header-title-row">
+          <div className="rrd-header-dot" />
+          <h1 className="rrd-header-title">Contract Risk</h1>
         </div>
       </div>
 
-      <div style={{
-        fontSize: '18px',
-        fontWeight: '600',
-        color: '#111827',
-        marginBottom: '24px'
-      }}>
-        TechVendor Inc
-      </div>
+      <div className="rrd-subtitle">TechVendor Inc</div>
 
       {/* Risk Description */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        border: '1px solid #f3f4f6',
-        marginBottom: '24px'
-      }}>
-        <h2 style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          color: '#111827',
-          marginBottom: '16px'
-        }}>Risk Description</h2>
-        <p style={{
-          color: '#6b7280',
-          fontSize: '14px',
-          lineHeight: '1.6',
-          margin: 0
-        }}>
+      <div className="rrd-card">
+        <h2 className="rrd-card-title">Risk Description</h2>
+        <p className="rrd-card-desc">
           New BSP circular on digital banking partnerships requires additional compliance measures that affect our agreements with FinTech Solutions, Digital Wallet Pro, and Crypto Exchange Partner.
         </p>
       </div>
 
       {/* AI Recommendations */}
-      <div style={{
-        backgroundColor: 'white',
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        border: '1px solid #f3f4f6',
-        marginBottom: '24px'
-      }}>
-        <h2 style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          color: '#111827',
-          marginBottom: '16px'
-        }}>AI Recommendations</h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div className="rrd-card">
+        <h2 className="rrd-card-title">AI Recommendations</h2>
+        <div className="rrd-recommend-list">
           {[
             'Convene emergency compliance committee meeting',
             'Assess contract modifications needed for each affected partner',
             'Prepare compliance timeline and resource allocation',
             'Communicate changes to affected partners within 72 hours'
           ].map((recommendation, index) => (
-            <div key={index} style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '12px'
-            }}>
-              <div style={{
-                width: '20px',
-                height: '20px',
-                backgroundColor: '#10b981',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-                marginTop: '2px'
-              }}>
-                <span style={{
-                  color: 'white',
-                  fontSize: '12px',
-                  fontWeight: 'bold'
-                }}>✓</span>
-              </div>
-              <span style={{
-                color: '#374151',
-                fontSize: '14px',
-                lineHeight: '1.5'
-              }}>{recommendation}</span>
+            <div key={index} className="rrd-recommend-item">
+              <div className="rrd-recommend-check"><span>✓</span></div>
+              <span className="rrd-recommend-text">{recommendation}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Two Column Layout for Timeline and Stakeholders */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: '24px',
-        marginBottom: '32px'
-      }}>
+      <div className="rrd-grid">
         {/* Timeline */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-          border: '1px solid #f3f4f6'
-        }}>
-          <h2 style={{
-            fontSize: '18px',
-            fontWeight: '600',
-            color: '#111827',
-            marginBottom: '16px'
-          }}>Timeline</h2>
-          <p style={{
-            color: '#6b7280',
-            fontSize: '14px',
-            margin: 0
-          }}>
-            Compliance deadline: 45 days
-          </p>
+        <div className="rrd-card">
+          <h2 className="rrd-card-title">Timeline</h2>
+          <p className="rrd-card-desc">Compliance deadline: 45 days</p>
         </div>
-
         {/* Key Stakeholders */}
-        <div style={{
-          backgroundColor: 'white',
-          borderRadius: '16px',
-          padding: '24px',
-          boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-          border: '1px solid #f3f4f6'
-        }}>
-          <h2 style={{
-            fontSize: '18px',
-            fontWeight: '600',
-            color: '#111827',
-            marginBottom: '16px'
-          }}>Key Stakeholders</h2>
-          <ul style={{
-            listStyle: 'none',
-            padding: 0,
-            margin: 0
-          }}>
+        <div className="rrd-card">
+          <h2 className="rrd-card-title">Key Stakeholders</h2>
+          <ul className="rrd-stakeholder-list">
             {['Legal Team', 'Sustainability Officer', 'Vendor Manager'].map((stakeholder, index) => (
-              <li key={index} style={{
-                color: '#6b7280',
-                fontSize: '14px',
-                marginBottom: '8px',
-                paddingLeft: '16px',
-                position: 'relative'
-              }}>
-                <span style={{
-                  position: 'absolute',
-                  left: '0',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: '4px',
-                  height: '4px',
-                  backgroundColor: '#9ca3af',
-                  borderRadius: '50%'
-                }} />
+              <li key={index} className="rrd-stakeholder-item">
+                <span className="rrd-stakeholder-dot" />
                 {stakeholder}
               </li>
             ))}
@@ -207,40 +69,16 @@ const RegulatoryRiskDetail = ({ onBack, onResolve, onDismiss, isMobile }) => {
       </div>
 
       {/* Action Buttons */}
-      <div style={{
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        gap: '12px'
-      }}>
+      <div className="rrd-action-row">
         <button
           onClick={onResolve}
-          style={{
-            flex: 1,
-            backgroundColor: '#ea580c',
-            color: 'white',
-            padding: '12px 24px',
-            borderRadius: '12px',
-            border: 'none',
-            fontWeight: '600',
-            fontSize: '16px',
-            cursor: 'pointer'
-          }}
+          className="rrd-action-btn rrd-action-btn-primary"
         >
           Mark as Resolved
         </button>
         <button
           onClick={onDismiss}
-          style={{
-            flex: 1,
-            backgroundColor: '#f3f4f6',
-            color: '#374151',
-            padding: '12px 24px',
-            borderRadius: '12px',
-            border: 'none',
-            fontWeight: '600',
-            fontSize: '16px',
-            cursor: 'pointer'
-          }}
+          className="rrd-action-btn rrd-action-btn-secondary"
         >
           Dismiss
         </button>

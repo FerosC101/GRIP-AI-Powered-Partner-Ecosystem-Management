@@ -1,0 +1,357 @@
+/* Root container */
+.cs-root-mobile {
+  padding: 16px 16px 80px 16px;
+}
+.cs-root-desktop {
+  padding: 16px;
+}
+
+/* Mobile Header */
+.cs-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.cs-mobile-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+.cs-mobile-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cs-mobile-logo {
+  width: 40px;
+  height: 32px;
+  border-radius: 8px;
+}
+.cs-mobile-logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+}
+
+/* Header with Back Button */
+.cs-header-row {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+.cs-back-btn {
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #6b7280;
+}
+.cs-header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 8px;
+  margin: 0;
+}
+.cs-header-desc {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Analytics Cards */
+.cs-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.cs-analytics-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+}
+.cs-analytics-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+  margin-bottom: 4px;
+}
+.cs-analytics-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+.cs-analytics-trend-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Chat Container */
+.cs-chat-container {
+  flex: 1;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid #f3f4f6;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Quick Actions */
+.cs-quick-actions-row {
+  padding: 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+.cs-quick-actions-grid-mobile {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.cs-quick-actions-grid-desktop {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.cs-quick-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cs-quick-action-label {
+  font-size: 12px;
+  color: #374151;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Messages */
+.cs-messages-list {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+.cs-message-row {
+  display: flex;
+  margin-bottom: 16px;
+}
+.cs-message-row-user {
+  justify-content: flex-end;
+}
+.cs-message-row-ai {
+  justify-content: flex-start;
+}
+.cs-message-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+.cs-message-bubble-user {
+  background-color: #ea580c;
+  color: white;
+}
+.cs-message-bubble-ai {
+  background-color: #f8fafc;
+  color: #374151;
+}
+.cs-message-content {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.cs-message-timestamp {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Typing Indicator */
+.cs-typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.cs-typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ea580c;
+  animation: cs-pulse 1.5s ease-in-out infinite;
+}
+.cs-typing-dot2 {
+  animation-delay: 0.2s;
+}
+.cs-typing-dot3 {
+  animation-delay: 0.4s;
+}
+@keyframes cs-pulse {
+  0%, 80%, 100% { opacity: 0.3; }
+  40% { opacity: 1; }
+}
+
+/* Input */
+.cs-input-row {
+  padding: 16px;
+  border-top: 1px solid #f3f4f6;
+}
+.cs-input-inner-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+.cs-input-textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 120px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+}
+.cs-input-send-btn {
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: #ea580c;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-input-send-btn-disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Upload Modal */
+.cs-upload-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+.cs-upload-modal {
+  width: 92%;
+  max-width: 560px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.cs-upload-modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.cs-upload-modal-close {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+.cs-upload-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-size: 13px;
+}
+.cs-upload-input {
+  display: block;
+  margin-top: 8px;
+}
+.cs-upload-textarea {
+  display: block;
+  width: 100%;
+  min-height: 64px;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+.cs-upload-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.cs-upload-cancel-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+}
+.cs-upload-analyze-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #ea580c;
+  color: white;
+  cursor: pointer;
+}
+.cs-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.cs-upload-active-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff7ed;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #ffedd5;
+}
+.cs-upload-active-file-name {
+  font-size: 13px;
+  color: #92400e;
+}
+.cs-upload-replace-btn {
+  margin-left: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+.cs-upload-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  cursor: pointer;
+}

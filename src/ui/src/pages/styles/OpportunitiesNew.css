@@ -1,0 +1,162 @@
+/* Root container */
+.opp-root-mobile {
+  padding: 16px 16px 80px 16px;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+.opp-root-desktop {
+  padding: 16px;
+  background: #f9fafb;
+  min-height: 100vh;
+}
+
+/* Mobile Header */
+.opp-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.opp-mobile-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.opp-mobile-logo {
+  width: 40px;
+  height: 32px;
+  border-radius: 8px;
+}
+.opp-mobile-logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+}
+
+/* Header */
+.opp-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-bottom: 24px;
+  gap: 8px;
+}
+.opp-header-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111827;
+  margin: 0;
+}
+.opp-header-count {
+  color: #6b7280;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Cards List */
+.opp-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Card */
+.opp-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.opp-card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.opp-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0;
+}
+.opp-card-priority {
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.opp-card-metrics-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.opp-card-metric-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+.opp-card-metric-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+.opp-card-partners-row {
+  margin-bottom: 16px;
+}
+.opp-card-partners-label {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+.opp-card-partners-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.opp-card-partner-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+}
+.opp-card-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.opp-card-confidence-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.opp-card-confidence-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+}
+.opp-card-confidence-label {
+  font-size: 12px;
+  color: #6b7280;
+}
+.opp-card-analyze-btn {
+  background: #f97316;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.opp-card-analyze-btn:hover {
+  background: #ea580c;
+  transform: translateY(-2px);
+}

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Send, FileText, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowRight, ArrowLeft } from 'lucide-react';
+import './styles/ContractStrategist.css';
 
 // Contract Strategist Main Component
 const ContractStrategist = ({ isMobile, onBack }) => {
@@ -15,7 +16,7 @@ const ContractStrategist = ({ isMobile, onBack }) => {
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
 
-  // New states for upload modal + session persistence
+  // New states for upload modal
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [analysisQuestion, setAnalysisQuestion] = useState('');
@@ -77,7 +78,6 @@ const ContractStrategist = ({ isMobile, onBack }) => {
         setMessages(prev => [...prev, { id: Date.now()+1, type: 'ai', content: `Server error: ${data.error}`, timestamp: new Date().toLocaleTimeString() }]);
       } else {
         const text = typeof data.advice === 'string' ? data.advice : JSON.stringify(data.advice, null, 2);
-        // update session id if backend sent one (safe no-op)
         if (data.session_id) setCurrentSessionId(data.session_id);
         if (data.filename) setActiveFileName(data.filename);
 
@@ -183,8 +183,6 @@ const ContractStrategist = ({ isMobile, onBack }) => {
     setShowUploadModal(true);
     setSelectedFile(null);
     setAnalysisQuestion('');
-    // Note: we don't auto-clear currentSessionId until user uploads and backend returns new session_id,
-    // but we give the user a visual cue by clearing activeFileName on replace:
     setActiveFileName(null);
   };
 
@@ -196,133 +194,51 @@ const ContractStrategist = ({ isMobile, onBack }) => {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* Mobile Header */}
-      {isMobile && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '24px'
-        }}>
+      {/* Header */}
+      <div className="cs-header-row">
+        {onBack && (
           <button
             onClick={onBack}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '8px 12px',
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              color: '#374151'
-            }}
+            className="cs-back-btn"
           >
-            <ArrowLeft style={{ width: '16px', height: '16px' }} />
-            Back
+            <ArrowLeft style={{ width: '20px', height: '20px' }} />
           </button>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <img 
-              src="/logo.png" 
-              alt="Grip Logo"
-              style={{
-                width: '40px',
-                height: '32px',
-                borderRadius: '8px'
-              }}
-            />
-            <span style={{
-              fontSize: '24px',
-              fontWeight: 'bold',
-              color: '#111827'
-            }}>Grip</span>
-          </div>
-        </div>
-      )}
-
-      {/* Header */}
-      <div style={{
-        marginBottom: '24px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
+        )}
         <div>
-          <h1 style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: '#111827',
-            marginBottom: '8px'
-          }}>Contract Strategist</h1>
-          <p style={{
-            color: '#6b7280',
-            fontSize: '14px',
-            margin: 0
-          }}>
-            Your AI-powered contract analysis assistant
-          </p>
+          <h1 className="cs-header-title">Contract Strategist</h1>
+          <p className="cs-header-desc">Your AI-powered contract analysis assistant</p>
         </div>
-
-        {/* small active file indicator + replace button */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          {activeFileName ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: '#fff7ed', padding: '8px 12px', borderRadius: '12px', border: '1px solid #ffedd5' }}>
-              <FileText style={{ width: '18px', height: '18px', color: '#ea580c' }} />
-              <div style={{ fontSize: '13px', color: '#92400e' }}>{activeFileName}</div>
-              <button onClick={replaceActiveContract} style={{ marginLeft: '8px', padding: '6px 8px', borderRadius: '8px', background: '#fff', border: '1px solid #e5e7eb', cursor: 'pointer' }}>Replace</button>
-            </div>
-          ) : (
-            <button onClick={() => setShowUploadModal(true)} style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #e5e7eb', background: '#fff', cursor: 'pointer' }}>
-              Upload Contract
-            </button>
-          )}
-        </div>
+      </div>
+      {/* Upload Contract/Active File Indicator*/}
+      <div className="cs-upload-row">
+        {activeFileName ? (
+          <div className="cs-upload-active-file">
+            <FileText style={{ width: '18px', height: '18px', color: '#ea580c' }} />
+            <div className="cs-upload-active-file-name">{activeFileName}</div>
+            <button onClick={replaceActiveContract} className="cs-upload-replace-btn">Replace</button>
+          </div>
+        ) : (
+          <button onClick={() => setShowUploadModal(true)} className="cs-upload-btn">
+            Upload Contract
+          </button>
+        )}
       </div>
 
       {/* Analytics Cards */}
       {!isMobile && (
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '16px',
-          marginBottom: '24px'
-        }}>
+        <div className="cs-analytics-grid">
           {contractAnalytics.map((metric, index) => (
-            <div key={index} style={{
-              backgroundColor: 'white',
-              borderRadius: '12px',
-              padding: '16px',
-              boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-              border: '1px solid #f3f4f6'
-            }}>
-              <div style={{
-                fontSize: '24px',
-                fontWeight: 'bold',
-                color: '#111827',
-                marginBottom: '4px'
-              }}>{metric.value}</div>
-              <div style={{
-                fontSize: '12px',
-                color: '#6b7280',
-                marginBottom: '8px'
-              }}>{metric.label}</div>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px'
-              }}>
+            <div key={index} className="cs-analytics-card">
+              <div className="cs-analytics-value">{metric.value}</div>
+              <div className="cs-analytics-label">{metric.label}</div>
+              <div className="cs-analytics-trend-row">
                 <ArrowRight style={{ 
                   width: '12px', 
                   height: '12px', 
                   color: metric.color,
                   transform: metric.trend.startsWith('+') ? 'rotate(-45deg)' : 'rotate(45deg)'
                 }} />
-                <span style={{
-                  fontSize: '12px',
-                  color: metric.color,
-                  fontWeight: '500'
-                }}>{metric.trend}</span>
+                <span style={{ fontSize: '12px', color: metric.color, fontWeight: '500' }}>{metric.trend}</span>
               </div>
             </div>
           ))}
@@ -330,44 +246,17 @@ const ContractStrategist = ({ isMobile, onBack }) => {
       )}
 
       {/* Chat Container */}
-      <div style={{
-        flex: 1,
-        backgroundColor: 'white',
-        borderRadius: '16px',
-        boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
-        border: '1px solid #f3f4f6',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden'
-      }}>
+      <div className="cs-chat-container">
         {/* Quick Actions */}
-        <div style={{
-          padding: '16px',
-          borderBottom: '1px solid #f3f4f6'
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
-            gap: '8px'
-          }}>
+        <div className="cs-quick-actions-row">
+          <div className={isMobile ? "cs-quick-actions-grid-mobile" : "cs-quick-actions-grid-desktop"}>
             {quickActions.map((action, index) => {
               const IconComponent = action.icon;
               return (
                 <button
                   key={index}
                   onClick={() => handleQuickAction(action.action)}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '8px',
-                    padding: '12px 8px',
-                    backgroundColor: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease'
-                  }}
+                  className="cs-quick-action-btn"
                   onMouseEnter={(e) => {
                     e.target.style.backgroundColor = '#e2e8f0';
                     e.target.style.transform = 'translateY(-1px)';
@@ -378,12 +267,7 @@ const ContractStrategist = ({ isMobile, onBack }) => {
                   }}
                 >
                   <IconComponent style={{ width: '20px', height: '20px', color: '#ea580c' }} />
-                  <span style={{
-                    fontSize: '12px',
-                    color: '#374151',
-                    fontWeight: '500',
-                    textAlign: 'center'
-                  }}>{action.label}</span>
+                  <span className="cs-quick-action-label">{action.label}</span>
                 </button>
               );
             })}
@@ -391,77 +275,22 @@ const ContractStrategist = ({ isMobile, onBack }) => {
         </div>
 
         {/* Messages */}
-        <div style={{
-          flex: 1,
-          padding: '16px',
-          overflowY: 'auto',
-          maxHeight: '400px'
-        }}>
+        <div className="cs-messages-list">
           {messages.map((message) => (
-            <div key={message.id} style={{
-              display: 'flex',
-              justifyContent: message.type === 'user' ? 'flex-end' : 'flex-start',
-              marginBottom: '16px'
-            }}>
-              <div style={{
-                maxWidth: '70%',
-                padding: '12px 16px',
-                borderRadius: '16px',
-                backgroundColor: message.type === 'user' ? '#ea580c' : '#f8fafc',
-                color: message.type === 'user' ? 'white' : '#374151',
-                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
-              }}>
-                <div style={{
-                  fontSize: '14px',
-                  lineHeight: '1.5',
-                  marginBottom: '4px'
-                }}>{message.content}</div>
-                <div style={{
-                  fontSize: '12px',
-                  opacity: 0.7
-                }}>{message.timestamp}</div>
+            <div key={message.id} className={`cs-message-row ${message.type === 'user' ? 'cs-message-row-user' : 'cs-message-row-ai'}`}>
+              <div className={`cs-message-bubble ${message.type === 'user' ? 'cs-message-bubble-user' : 'cs-message-bubble-ai'}`}>
+                <div className="cs-message-content">{message.content}</div>
+                <div className="cs-message-timestamp">{message.timestamp}</div>
               </div>
             </div>
           ))}
-          
           {isTyping && (
-            <div style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              marginBottom: '16px'
-            }}>
-              <div style={{
-                padding: '12px 16px',
-                borderRadius: '16px',
-                backgroundColor: '#f8fafc',
-                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)'
-              }}>
-                <div style={{
-                  display: 'flex',
-                  gap: '4px',
-                  alignItems: 'center'
-                }}>
-                  <div style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: '#ea580c',
-                    animation: 'pulse 1.5s ease-in-out infinite'
-                  }} />
-                  <div style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: '#ea580c',
-                    animation: 'pulse 1.5s ease-in-out infinite 0.2s'
-                  }} />
-                  <div style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: '#ea580c',
-                    animation: 'pulse 1.5s ease-in-out infinite 0.4s'
-                  }} />
+            <div className="cs-message-row cs-message-row-ai">
+              <div className="cs-message-bubble cs-message-bubble-ai">
+                <div className="cs-typing-indicator">
+                  <div className="cs-typing-dot"></div>
+                  <div className="cs-typing-dot cs-typing-dot2"></div>
+                  <div className="cs-typing-dot cs-typing-dot3"></div>
                 </div>
               </div>
             </div>
@@ -470,15 +299,8 @@ const ContractStrategist = ({ isMobile, onBack }) => {
         </div>
 
         {/* Input */}
-        <div style={{
-          padding: '16px',
-          borderTop: '1px solid #f3f4f6'
-        }}>
-          <div style={{
-            display: 'flex',
-            gap: '8px',
-            alignItems: 'flex-end'
-          }}>
+        <div className="cs-input-row">
+          <div className="cs-input-inner-row">
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
@@ -489,33 +311,12 @@ const ContractStrategist = ({ isMobile, onBack }) => {
                 }
               }}
               placeholder={currentSessionId ? "Ask about the uploaded contract..." : "Ask about contracts or upload one to use as context..."}
-              style={{
-                flex: 1,
-                minHeight: '40px',
-                maxHeight: '120px',
-                padding: '12px',
-                borderRadius: '12px',
-                border: '1px solid #e5e7eb',
-                fontSize: '14px',
-                resize: 'none',
-                outline: 'none',
-                fontFamily: 'inherit'
-              }}
+              className="cs-input-textarea"
             />
             <button
               onClick={handleSendMessage}
               disabled={!inputValue.trim()}
-              style={{
-                padding: '12px',
-                borderRadius: '12px',
-                border: 'none',
-                backgroundColor: inputValue.trim() ? '#ea580c' : '#e5e7eb',
-                color: inputValue.trim() ? 'white' : '#9ca3af',
-                cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
+              className={`cs-input-send-btn${!inputValue.trim() ? ' cs-input-send-btn-disabled' : ''}`}
             >
               <Send style={{ width: '16px', height: '16px' }} />
             </button>
@@ -523,70 +324,35 @@ const ContractStrategist = ({ isMobile, onBack }) => {
         </div>
       </div>
 
-      {/* Upload modal (minimal, matches UI) */}
+      {/* Upload modal*/}
       {showUploadModal && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'rgba(0,0,0,0.4)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 60
-        }}>
-          <div style={{
-            width: isMobile ? '92%' : '560px',
-            background: 'white',
-            borderRadius: '12px',
-            padding: '16px',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.15)'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+        <div className="cs-upload-modal-overlay">
+          <div className="cs-upload-modal">
+            <div className="cs-upload-modal-header">
               <h3 style={{ margin: 0 }}>Analyze New Contract</h3>
-              <button onClick={() => setShowUploadModal(false)} style={{
-                border: 'none',
-                background: 'transparent',
-                cursor: 'pointer',
-                fontSize: '16px'
-              }}>✕</button>
+              <button onClick={() => setShowUploadModal(false)} className="cs-upload-modal-close">✕</button>
             </div>
-
-            <label style={{ display: 'block', marginBottom: '8px', color: '#374151', fontSize: '13px' }}>
+            <label className="cs-upload-label">
               Select PDF contract
               <input
                 type="file"
                 accept="application/pdf"
                 onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-                style={{ display: 'block', marginTop: '8px' }}
+                className="cs-upload-input"
               />
             </label>
-
-            <label style={{ display: 'block', marginBottom: '12px', color: '#374151', fontSize: '13px' }}>
+            <label className="cs-upload-label" style={{ marginBottom: '12px' }}>
               Short question / context (optional)
               <textarea
                 value={analysisQuestion}
                 onChange={(e) => setAnalysisQuestion(e.target.value)}
                 placeholder="e.g., 'Focus on termination and liability clauses.'"
-                style={{ display: 'block', width: '100%', minHeight: '64px', marginTop: '8px', padding: '8px', borderRadius: '8px', border: '1px solid #e5e7eb' }}
+                className="cs-upload-textarea"
               />
             </label>
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
-              <button onClick={() => setShowUploadModal(false)} style={{
-                padding: '8px 12px',
-                borderRadius: '8px',
-                border: '1px solid #e5e7eb',
-                background: '#fff',
-                cursor: 'pointer'
-              }}>Cancel</button>
-              <button onClick={analyzeContract} style={{
-                padding: '8px 12px',
-                borderRadius: '8px',
-                border: 'none',
-                background: '#ea580c',
-                color: 'white',
-                cursor: 'pointer'
-              }}>Analyze</button>
+            <div className="cs-upload-modal-actions">
+              <button onClick={() => setShowUploadModal(false)} className="cs-upload-cancel-btn">Cancel</button>
+              <button onClick={analyzeContract} className="cs-upload-analyze-btn">Analyze</button>
             </div>
           </div>
         </div>
