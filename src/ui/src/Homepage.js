@@ -17,6 +17,7 @@ import Opportunities from "./pages/OpportunitiesNew";
 import Risk from "./pages/Risk";
 import InvestorDashboard from "./InvestorDashboard";
 
+
 const GripDashboard = () => {
   const [isMobile, setIsMobile] = useState(false);
   const navigate = useNavigate();
@@ -61,6 +62,43 @@ const GripDashboard = () => {
     textDecoration: "none"
   });
 
+  //attempt at fixed header for desktop
+  const desktopHeaderStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    backgroundColor: "white",
+    zIndex: 1000,
+    borderBottom: "1px solid #e5e7eb",
+    padding: "24px"
+  };
+
+  const sidebarWidth = 320;
+  const desktopSidebarStyle = {
+    position: "fixed",
+    top: "72px", // Adjust this to match your header's height (e.g., 72px)
+    left: 0,
+    width: `${sidebarWidth}px`,
+    height: `calc(100vh - 72px)`,
+    backgroundColor: "white",
+    borderRight: "1px solid #e5e7eb",
+    padding: "24px",
+    overflowY: "auto",
+    zIndex: 999
+  };
+
+  const mainLayoutStyle = {
+    flex: 1,
+    display: isMobile ? "block" : "flex",
+    marginTop: isMobile ? 0 : "72px", // header height
+    marginLeft: isMobile ? 0 : `${sidebarWidth}px`, // sidebar width
+    minHeight: "100vh",
+    background: "#f9fafb",
+    overflowY: "auto"
+  };
+
+
   return (
     <div
       style={{
@@ -75,11 +113,9 @@ const GripDashboard = () => {
       {/* Desktop Header */}
       {!isMobile && (
         <div
-          style={{
-            backgroundColor: "white",
-            borderBottom: "1px solid #e5e7eb",
-            padding: "24px"
-          }}
+          style={
+            desktopHeaderStyle
+          }
         >
           <div
             style={{
@@ -92,7 +128,7 @@ const GripDashboard = () => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <img
-                src="public/logo.png"
+                src="/logo.png"
                 alt="Grip Logo"
                 style={{ width: "40px", height: "32px", borderRadius: "8px" }}
               />
@@ -108,7 +144,7 @@ const GripDashboard = () => {
                 <span style={{ fontWeight: "600", color: "#111827" }}>127</span>
               </span>
               <span>
-                Avg Trust Score:{" "}
+                Avg Engagement Score:{" "}
                 <span style={{ fontWeight: "600", color: "#111827" }}>89.5</span>
               </span>
             </div>
@@ -122,10 +158,7 @@ const GripDashboard = () => {
         {!isMobile && (
           <div
             style={{
-              width: "320px",
-              backgroundColor: "white",
-              borderRight: "1px solid #e5e7eb",
-              padding: "24px"
+              ...desktopSidebarStyle
             }}
           >
             <nav style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -145,8 +178,19 @@ const GripDashboard = () => {
           </div>
         )}
 
+
+
+
         {/* Page Content */}
-        <div style={{ flex: 1, padding: isMobile ? "0" : "24px" }}>
+        <div
+          style={{
+            flex: 1,
+            marginTop: !isMobile ? "80px" : undefined, // Offset for header
+            marginLeft: !isMobile ? `${sidebarWidth + 40}px` : undefined, // Offset for sidebar
+            padding: isMobile ? "0" : "24px",
+            boxSizing: "border-box"
+          }}
+        >
           <div
             style={{
               backgroundColor: isMobile ? "transparent" : "white",

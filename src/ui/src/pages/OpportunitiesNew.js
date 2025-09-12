@@ -1,3 +1,4 @@
+import './styles/OpportunitiesNew.css';
 import React, {useState} from "react";
 import InvestorDashboard from "../InvestorDashboard";
 
@@ -83,178 +84,65 @@ if (selectedOpportunity) {
   console.log("onAnalyze prop received:", onAnalyze);
 
  return (
-  <div style={{ padding: isMobile ? "16px" : "24px" }}>
+  <div className={isMobile ? 'opp-root-mobile' : 'opp-root-desktop'}>
     {isMobile && (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: "24px",
-          position: "relative",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div className="opp-mobile-header">
+        <div className="opp-mobile-logo-row">
           <img
             src="/logo.png"
             alt="Grip Logo"
-            style={{
-              width: "40px",
-              height: "32px",
-              borderRadius: "8px",
-            }}
+            className="opp-mobile-logo"
           />
-          <span
-            style={{
-              fontSize: "24px",
-              fontWeight: "bold",
-              color: "#111827",
-            }}
-          >
-            Grip
-          </span>
+          <span className="opp-mobile-logo-text">Grip</span>
         </div>
       </div>
     )}
 
     {/* Page Header */}
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: isMobile ? "flex-start" : "center",
-        flexDirection: isMobile ? "column" : "row",
-        marginBottom: "24px",
-        gap: isMobile ? "8px" : 0,
-      }}
-    >
-      <h1 style={{ fontSize: "22px", fontWeight: "bold", color: "#111827" }}>
+    <div className="opp-header-row">
+      <h1 className="opp-header-title">
         AI-Discovered Opportunities
       </h1>
-      <p style={{ color: "#6b7280", fontSize: "14px" }}>
+      <p className="opp-header-count">
         {opportunities.length} Active
       </p>
     </div>
 
     {/* Cards */}
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div className="opp-cards-list">
       {opportunities.map((opportunity) => (
         <div
           key={opportunity.id}
-          style={{
-            backgroundColor: "white",
-            borderRadius: "12px",
-            padding: "20px",
-            border: "1px solid #f3f4f6",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-          }}
+          className="opp-card"
         >
           {/* Title + Priority */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: "12px",
-            }}
-          >
-            <h2
-              style={{
-                fontSize: "18px",
-                fontWeight: "600",
-                color: "#1d1d1f",
-              }}
-            >
-              {opportunity.title}
-            </h2>
-            <span
-              style={{
-                backgroundColor: opportunity.priorityColor,
-                color: "white",
-                padding: "4px 10px",
-                borderRadius: "12px",
-                fontSize: "12px",
-                fontWeight: "600",
-              }}
-            >
+          <div className="opp-card-title-row">
+            <h2 className="opp-card-title">{opportunity.title}</h2>
+            <span className="opp-card-priority" style={{ backgroundColor: opportunity.priorityColor }}>
               {opportunity.priority}
             </span>
           </div>
 
           {/* Metrics */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "16px",
-              marginBottom: "16px",
-            }}
-          >
+          <div className="opp-card-metrics-row">
             <div>
-              <p
-                style={{
-                  fontSize: "12px",
-                  color: "#6b7280",
-                  marginBottom: "4px",
-                }}
-              >
-                Projected ROI
-              </p>
-              <p
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "700",
-                  color: "#111827",
-                }}
-              >
-                {opportunity.projectedROI}
-              </p>
+              <p className="opp-card-metric-label">Projected ROI</p>
+              <p className="opp-card-metric-value">{opportunity.projectedROI}</p>
             </div>
             <div>
-              <p
-                style={{
-                  fontSize: "12px",
-                  color: "#6b7280",
-                  marginBottom: "4px",
-                }}
-              >
-                Timeline
-              </p>
-              <p
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "700",
-                  color: "#111827",
-                }}
-              >
-                {opportunity.timeline}
-              </p>
+              <p className="opp-card-metric-label">Timeline</p>
+              <p className="opp-card-metric-value">{opportunity.timeline}</p>
             </div>
           </div>
 
           {/* Partners */}
-          <div style={{ marginBottom: "16px" }}>
-            <p
-              style={{
-                fontSize: "12px",
-                color: "#6b7280",
-                marginBottom: "6px",
-              }}
-            >
-              Key Partners
-            </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+          <div className="opp-card-partners-row">
+            <p className="opp-card-partners-label">Key Partners</p>
+            <div className="opp-card-partners-list">
               {opportunity.partners.map((partner, idx) => (
                 <span
                   key={idx}
-                  style={{
-                    fontSize: "11px",
-                    padding: "4px 10px",
-                    borderRadius: "12px",
-                    backgroundColor: "#f9fafb",
-                    border: "1px solid #e5e7eb",
-                    color: "#111827",
-                  }}
+                  className="opp-card-partner-badge"
                 >
                   {partner}
                 </span>
@@ -263,37 +151,15 @@ if (selectedOpportunity) {
           </div>
 
           {/* Footer */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <div
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  backgroundColor: "#10b981",
-                  borderRadius: "50%",
-                }}
-              />
-              <span style={{ fontSize: "12px", color: "#6b7280" }}>
+          <div className="opp-card-footer-row">
+            <div className="opp-card-confidence-row">
+              <div className="opp-card-confidence-dot" />
+              <span className="opp-card-confidence-label">
                 Confidence: {opportunity.confidence}
               </span>
             </div>
             <button
-              style={{
-                backgroundColor: "#f97316",
-                color: "white",
-                padding: "6px 14px",
-                borderRadius: "8px",
-                border: "none",
-                fontSize: "13px",
-                fontWeight: "600",
-                cursor: "pointer",
-              }}
+              className="opp-card-analyze-btn"
               onClick={() => setSelectedOpportunity(opportunity)}
             >
               Analyze
