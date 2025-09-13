@@ -1,21 +1,23 @@
-// Import only what you use
-import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from 'firebase/analytics'; // optional, only if needed
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCwOLdPmp_Kgb-l9cHxM0bP4T7138qQPgA",
-    authDomain: "grip-7df3d.firebaseapp.com",
-    projectId: "grip-7df3d",
-    storageBucket: "grip-7df3d.appspot.com", // ✅ fixed: ".app" → ".app**spot**.com"
-    messagingSenderId: "742256029669",
-    appId: "1:742256029669:web:6e994d7f87d238c62ac90c",
-    measurementId: "G-PNLL69CTRV"
+    apiKey: "AIzaSyAtVscDeiwmdjLea2QzdqC8iOPhhSllOWU",
+    authDomain: "grip-7a7d6.firebaseapp.com",
+    projectId: "grip-7a7d6",
+    storageBucket: "grip-7a7d6.firebasestorage.app",
+    messagingSenderId: "574685380915",
+    appId: "1:574685380915:web:e5fd96393a4336a908be46",
+    measurementId: "G-LRE7JBEYX5"
 };
 
-// Initialize Firebase
+// Initialize Firebases
 const app = initializeApp(firebaseConfig);
-
-// Optional: Only use analytics if running in the browser and it’s needed
-// const analytics = getAnalytics(app);
+const analytics = getAnalytics(app);
 
 export default app;
