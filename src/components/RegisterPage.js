@@ -9,8 +9,7 @@ const RegisterPage = ({ onNavigate }) => {
     workEmail: '',
     password: '',
     contactNumber: '',
-    agreeToTerms: false,
-    proofOfEmployment: null
+    agreeToTerms: false
   });
 
   const [loading, setLoading] = useState(false);
@@ -22,14 +21,6 @@ const RegisterPage = ({ onNavigate }) => {
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData(prev => ({
-      ...prev,
-      proofOfEmployment: file
     }));
   };
 
@@ -160,30 +151,6 @@ const RegisterPage = ({ onNavigate }) => {
                   required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
               />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Proof of Employment (PDF/Image)
-              </label>
-              <div className="border-2 border-dashed border-gray-300 rounded-md p-4 text-center">
-                <input
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={handleFileChange}
-                    className="hidden"
-                    id="file-upload"
-                />
-                <label
-                    htmlFor="file-upload"
-                    className="inline-block px-4 py-2 bg-orange-500 text-white rounded-md cursor-pointer hover:bg-orange-600 transition-colors"
-                >
-                  Choose File
-                </label>
-                <span className="ml-2 text-gray-500">
-                {formData.proofOfEmployment ? formData.proofOfEmployment.name : 'No file chosen'}
-              </span>
-              </div>
             </div>
 
             <div className="flex items-start space-x-2">

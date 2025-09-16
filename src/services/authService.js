@@ -5,11 +5,12 @@ import {
     updateProfile
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { auth, db, storage } from '../firebase';
+import { auth, db } from '../firebase';
 
+// Register a new user
 export const registerUser = async (userData) => {
     try {
+        // Create user with email and password
         const userCredential = await createUserWithEmailAndPassword(
             auth,
             userData.workEmail,
@@ -18,26 +19,20 @@ export const registerUser = async (userData) => {
 
         const user = userCredential.user;
 
-        let proofOfEmploymentURL = null;
-        if (userData.proofOfEmployment) {
-            const storageRef = ref(storage, `proof-of-employment/${user.uid}`);
-            const snapshot = await uploadBytes(storageRef, userData.proofOfEmployment);
-            proofOfEmploymentURL = await getDownloadURL(snapshot.ref);
-        }
-
+        // Update user profile
         await updateProfile(user, {
             displayName: userData.companyName
         });
 
+        // Store additional user data in Firestore
         await setDoc(doc(db, 'users', user.uid), {
             uid: user.uid,
             email: userData.workEmail,
             companyName: userData.companyName,
             position: userData.position,
             contactNumber: userData.contactNumber,
-            proofOfEmploymentURL: proofOfEmploymentURL,
             createdAt: new Date(),
-            isVerified: false
+            isVerified: false // Admin can verify later
         });
 
         return {
@@ -55,11 +50,13 @@ export const registerUser = async (userData) => {
     }
 };
 
+// Login user
 export const loginUser = async (email, password) => {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
+        // Get additional user data from Firestore
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         const userData = userDoc.exists() ? userDoc.data() : null;
 
@@ -79,6 +76,7 @@ export const loginUser = async (email, password) => {
     }
 };
 
+// Logout user
 export const logoutUser = async () => {
     try {
         await signOut(auth);
@@ -95,6 +93,7 @@ export const logoutUser = async () => {
     }
 };
 
+// Get current user data
 export const getCurrentUserData = async (uid) => {
     try {
         const userDoc = await getDoc(doc(db, 'users', uid));
