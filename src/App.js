@@ -7,22 +7,21 @@ import './App.css';
 import app from './firebase'; // Firebase initialized here
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('landing');
+    const [currentPage, setCurrentPage] = useState('landing');
 
-  const navigateTo = (page) => {
-    setCurrentPage(page);
-  };
+    const navigateTo = (page) => {
+        setCurrentPage(page);
+    };
 
-  console.log("Firebase initialized:", app);
+    console.log("Firebase initialized:", app);
 
-  return (
-      <div className="App">
-        {currentPage === 'landing' && <LandingPage onNavigate={navigateTo} />}
-        {currentPage === 'register' && <RegisterPage onNavigate={navigateTo} />}
-        {currentPage === 'login' && <LoginPage onNavigate={navigateTo} />}
-      </div>
-  );
+    return (
+        <div className="App">
+            {currentPage === 'landing' && <LandingPage onNavigate={navigateTo} />}
+            {currentPage === 'register' && <RegisterPage onNavigate={navigateTo} />}
+            {currentPage === 'login' && <LoginPage onNavigate={navigateTo} />}
+        </div>
+    );
 }
 
 export default App;
-n
