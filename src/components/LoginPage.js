@@ -30,9 +30,8 @@ const LoginPage = ({ onNavigate }) => {
       if (result.success) {
         console.log('Login successful:', result.user);
         console.log('User data:', result.userData);
-        // You can navigate to a dashboard or main app page here
-        alert('Login successful! Welcome back.');
-        // onNavigate('dashboard'); // Create a dashboard page later
+        // Redirect to dashboard
+        onNavigate('dashboard');
       } else {
         setError(result.error);
       }
